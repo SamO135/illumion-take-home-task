@@ -31,6 +31,7 @@
 # Limitations
 - There are only 10 unique colours for rectangles/plots, so they will begin to cycle after they have all been used up. This will make the graphs less clear if many rectangles are drawn at the same time.
 - There is no way to delete rectangles from the image/graph
+- There is not much code coverage with the current test cases
 
 These limitations are addressable given more time.
 

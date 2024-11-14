@@ -17,7 +17,7 @@ class RectangleSelectorTool:
         self.on_select_callback = on_select_callback
         self.rect_selector = RectangleSelector(self.ax, self.on_select, useblit=True, button=[1], interactive=True)
         self.colours = itertools.cycle(cm.tab10.colors)  # Use a color map for unique rectangle colors
-        self.rectangles = []
+        self.rectangles = {}
 
     def on_select(self, eclick, erelease):
         """Callback for when user draws a rectangle.
@@ -31,7 +31,7 @@ class RectangleSelectorTool:
         if self.on_select_callback:
             self.on_select_callback(x1, y1, x2, y2)
 
-    def add_rectangle_to_frame(self, x1: float, y1: float, x2: float, y2: float):
+    def add_rectangle_to_frame(self, x1: float, y1: float, x2: float, y2: float) -> Rectangle:
         """Draw the rectangle onto the frame so it is persistent.
         
         Args:
@@ -39,8 +39,12 @@ class RectangleSelectorTool:
             y1 (float): y1 coordinate of rectangle
             x2 (float): x2 coordinate of rectangle
             y2 (float): y2 coordinate of rectangle
+
+        Returns:
+            Rectangle: the rectangle object
         """
         colour = next(self.colours)
         rectangle = Rectangle((x1, y1), x2 - x1, y2 - y1, linewidth=2, edgecolor=colour, facecolor='none')
         self.ax.add_patch(rectangle)
-        self.rectangles.append((rectangle, colour))
+        self.rectangles[rectangle] = colour
+        return rectangle

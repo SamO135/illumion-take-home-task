@@ -27,7 +27,8 @@ class MovieAnalysisApp:
             y2 (float): y2 coordinate of rectangle
         """
         mean_intensity = self.intensity_analyser.calculate_mean_intensity(x1, y1, x2, y2)
-        colour = self.rectangle_selector_tool.add_rectangle_to_frame(x1, y1, x2, y2)
+        rectangle = self.rectangle_selector_tool.add_rectangle_to_frame(x1, y1, x2, y2)
+        colour = self.rectangle_selector_tool.rectangles[rectangle]
         self.intensity_analyser.plot_intensity_over_time(mean_intensity, colour, self.rectangle_count)
         self.rectangle_count += 1
 
